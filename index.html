@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sprout Source - Giải pháp Công nghệ Thông tin</title>
+    <style>
+      :root {
+        --primary-color: #2ecc71;
+        --secondary-color: #27ae60;
+        --dark-color: #2c3e50;
+        --light-color: #ecf0f1;
+        --accent-color: #3498db;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f9f9f9;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      /* Header */
+      header {
+        background-color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .container {
+        width: 85%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo img {
+        height: 40px;
+        margin-right: 10px;
+      }
+
+      .logo-text {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--dark-color);
+      }
+
+      .logo-text span {
+        color: var(--primary-color);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+      }
+
+      nav ul li {
+        margin-left: 30px;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: var(--dark-color);
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      nav ul li a:hover {
+        color: var(--primary-color);
+      }
+
+      .cta-button {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: 500;
+        transition: background-color 0.3s;
+      }
+
+      .cta-button:hover {
+        background-color: var(--secondary-color);
+        color: white;
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 160px 0 100px;
+        background: linear-gradient(
+            135deg,
+            rgba(236, 240, 241, 0.8),
+            rgba(236, 240, 241, 0.9)
+          ),
+          url("/api/placeholder/1600/900") center/cover no-repeat;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 2.8rem;
+        margin-bottom: 20px;
+        color: var(--dark-color);
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        color: #555;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .secondary-button {
+        background-color: white;
+        color: var(--dark-color);
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: 500;
+        border: 1px solid var(--dark-color);
+        transition: all 0.3s;
+        text-decoration: none;
+      }
+
+      .secondary-button:hover {
+        background-color: var(--dark-color);
+        color: white;
+      }
+
+      /* Services Section */
+      .services {
+        padding: 80px 0;
+        background-color: white;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+      .section-title h2 {
+        font-size: 2.2rem;
+        color: var(--dark-color);
+        position: relative;
+        display: inline-block;
+        padding-bottom: 10px;
+      }
+
+      .section-title h2::after {
+        content: "";
+        position: absolute;
+        width: 50%;
+        height: 3px;
+        background-color: var(--primary-color);
+        bottom: 0;
+        left: 25%;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .service-card {
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .service-icon {
+        height: 150px;
+        background-color: var(--primary-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 3rem;
+      }
+
+      .service-content {
+        padding: 25px;
+      }
+
+      .service-content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: var(--dark-color);
+      }
+
+      /* About Section */
+      .about {
+        padding: 80px 0;
+        background-color: #f9f9f9;
+      }
+
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+      }
+
+      .about-image {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .about-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .about-text h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: var(--dark-color);
+      }
+
+      .about-text p {
+        margin-bottom: 20px;
+        color: #555;
+      }
+
+      .value-list {
+        margin-top: 30px;
+      }
+
+      .value-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .value-icon {
+        background-color: rgba(46, 204, 113, 0.1);
+        color: var(--primary-color);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 15px;
+        font-size: 1.2rem;
+      }
+
+      /* Contact Section */
+      .contact {
+        padding: 80px 0;
+        background-color: white;
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+      }
+
+      .contact-info h3 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: var(--dark-color);
+      }
+
+      .contact-detail {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .contact-icon {
+        width: 40px;
+        height: 40px;
+        background-color: rgba(46, 204, 113, 0.1);
+        color: var(--primary-color);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 15px;
+        font-size: 1.2rem;
+      }
+
+      .contact-form h3 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: var(--dark-color);
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+      }
+
+      textarea.form-control {
+        height: 150px;
+        resize: vertical;
+      }
+
+      .submit-button {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .submit-button:hover {
+        background-color: var(--secondary-color);
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--dark-color);
+        color: white;
+        padding: 50px 0 20px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .footer-col h4 {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-col h4::after {
+        content: "";
+        position: absolute;
+        width: 50px;
+        height: 2px;
+        background-color: var(--primary-color);
+        bottom: 0;
+        left: 0;
+      }
+
+      .footer-links {
+        list-style: none;
+      }
+
+      .footer-links li {
+        margin-bottom: 10px;
+      }
+
+      .footer-links a {
+        color: #aaa;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-links a:hover {
+        color: var(--primary-color);
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-icon {
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        transition: background-color 0.3s;
+        text-decoration: none;
+      }
+
+      .social-icon:hover {
+        background-color: var(--primary-color);
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: #aaa;
+        font-size: 0.9rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .nav-container {
+          flex-direction: column;
+          padding: 15px 0;
+        }
+
+        nav ul {
+          margin-top: 15px;
+        }
+
+        nav ul li {
+          margin-left: 15px;
+          margin-right: 15px;
+        }
+
+        .hero {
+          padding: 120px 0 80px;
+        }
+
+        .hero h1 {
+          font-size: 2.2rem;
+        }
+
+        .about-content,
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .about-image {
+          order: -1;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .hero-buttons {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+
+        nav ul {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        nav ul li {
+          margin-bottom: 10px;
+        }
+
+        .section-title h2 {
+          font-size: 1.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <div class="nav-container">
+          <div class="logo">
+            <div class="logo-text"><span>Sprout</span> Source</div>
+          </div>
+          <nav>
+            <ul>
+              <li><a href="#home">Trang chủ</a></li>
+              <li><a href="#services">Dịch vụ</a></li>
+              <li><a href="#about">Về chúng tôi</a></li>
+              <li><a href="#contact">Liên hệ</a></li>
+              <li><a href="#" class="cta-button">Đặt lịch tư vấn</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="container">
+        <h1>Giải pháp Công nghệ Toàn diện</h1>
+        <p>
+          Sprout Source cung cấp các giải pháp công nghệ thông tin tối ưu giúp
+          doanh nghiệp của bạn phát triển bền vững trong kỷ nguyên số.
+        </p>
+        <div class="hero-buttons">
+          <a href="#services" class="cta-button">Khám phá dịch vụ</a>
+          <a href="#contact" class="secondary-button">Liên hệ ngay</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+      <div class="container">
+        <div class="section-title">
+          <h2>Dịch vụ của chúng tôi</h2>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">
+              <span>&#128187;</span>
+            </div>
+            <div class="service-content">
+              <h3>Phát triển phần mềm</h3>
+              <p>
+                Chúng tôi phát triển các ứng dụng web và di động tùy chỉnh, đáp
+                ứng mọi nhu cầu kinh doanh của bạn với công nghệ tiên tiến.
+              </p>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <span>&#128202;</span>
+            </div>
+            <div class="service-content">
+              <h3>Tư vấn công nghệ</h3>
+              <p>
+                Tư vấn chiến lược về công nghệ thông tin, giúp bạn đưa ra quyết
+                định đúng đắn và tối ưu hóa quy trình kinh doanh.
+              </p>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <span>&#127760;</span>
+            </div>
+            <div class="service-content">
+              <h3>Dịch vụ đám mây</h3>
+              <p>
+                Cung cấp giải pháp đám mây toàn diện, từ di chuyển dữ liệu đến
+                quản lý và tối ưu hóa cơ sở hạ tầng đám mây.
+              </p>
+            </div>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <span>&#128272;</span>
+            </div>
+            <div class="service-content">
+              <h3>Bảo mật thông tin</h3>
+              <p>
+                Bảo vệ doanh nghiệp của bạn khỏi các mối đe dọa trực tuyến với
+                giải pháp bảo mật toàn diện và cập nhật.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <h2>Về Sprout Source</h2>
+            <p>
+              Sprout Source là đối tác công nghệ đáng tin cậy cho các doanh
+              nghiệp mọi quy mô. Chúng tôi cung cấp các giải pháp công nghệ
+              thông tin hiện đại, giúp các doanh nghiệp tối ưu hóa quy trình,
+              tăng năng suất và đạt được mục tiêu kinh doanh.
+            </p>
+            <p>
+              Với đội ngũ chuyên gia nhiều kinh nghiệm và đam mê công nghệ,
+              chúng tôi cam kết mang đến những giải pháp tốt nhất, phù hợp với
+              nhu cầu và ngân sách của từng khách hàng.
+            </p>
+
+            <div class="value-list">
+              <div class="value-item">
+                <div class="value-icon">✓</div>
+                <div>Chuyên môn cao trong nhiều lĩnh vực công nghệ</div>
+              </div>
+              <div class="value-item">
+                <div class="value-icon">✓</div>
+                <div>Giải pháp tùy chỉnh theo nhu cầu doanh nghiệp</div>
+              </div>
+              <div class="value-item">
+                <div class="value-icon">✓</div>
+                <div>Hỗ trợ kỹ thuật 24/7 cho khách hàng</div>
+              </div>
+            </div>
+          </div>
+          <div class="about-image">
+            <img src="/api/placeholder/600/400" alt="Về Sprout Source" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="section-title">
+          <h2>Liên hệ với chúng tôi</h2>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h3>Thông tin liên hệ</h3>
+            <div class="contact-detail">
+              <div class="contact-icon">&#128205;</div>
+              <div>
+                <h4>Địa chỉ</h4>
+                <p>Thôn 3 Hạ Lôi, xã Mê Linh, Huyện Mê Linh, TP. Hà Nội</p>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-icon">&#128222;</div>
+              <div>
+                <h4>Điện thoại</h4>
+                <p>+84 736 131 279</p>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-icon">✉️</div>
+              <div>
+                <h4>Email</h4>
+                <p>hungnv.sproutsource@gmail.com</p>
+              </div>
+            </div>
+            <div class="contact-detail">
+              <div class="contact-icon">&#128197;</div>
+              <div>
+                <h4>Giờ làm việc</h4>
+                <p>Thứ hai - Thứ sáu: 9:00 - 17:00</p>
+              </div>
+            </div>
+          </div>
+          <div class="contact-form">
+            <h3>Gửi tin nhắn cho chúng tôi</h3>
+            <form>
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Họ và tên"
+                />
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="Email" />
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Số điện thoại"
+                />
+              </div>
+              <div class="form-group">
+                <textarea
+                  class="form-control"
+                  placeholder="Nội dung tin nhắn"
+                ></textarea>
+              </div>
+              <button type="submit" class="submit-button">Gửi tin nhắn</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4>Sprout Source</h4>
+            <p>
+              Đối tác công nghệ đáng tin cậy cho sự phát triển bền vững của
+              doanh nghiệp trong kỷ nguyên số.
+            </p>
+            <div class="social-links">
+              <a href="#" class="social-icon">f</a>
+              <a href="#" class="social-icon">in</a>
+              <a href="#" class="social-icon">t</a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Dịch vụ</h4>
+            <ul class="footer-links">
+              <li><a href="#">Phát triển phần mềm</a></li>
+              <li><a href="#">Tư vấn công nghệ</a></li>
+              <li><a href="#">Dịch vụ đám mây</a></li>
+              <li><a href="#">Bảo mật thông tin</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Hỗ trợ</h4>
+            <ul class="footer-links">
+              <li><a href="#">Câu hỏi thường gặp</a></li>
+              <li><a href="#">Chính sách bảo mật</a></li>
+              <li><a href="#">Điều khoản dịch vụ</a></li>
+              <li><a href="#">Hỗ trợ kỹ thuật</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Liên hệ nhanh</h4>
+            <ul class="footer-links">
+              <li><a href="tel:+842812345678">+84 736 131 279</a></li>
+              <li>
+                <a href="mailto:hungnv.sproutsource@gmail.com"
+                  >hungnv.sproutsource@gmail.com</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>&copy; 2025 Sprout Source. Tất cả các quyền được bảo lưu.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
